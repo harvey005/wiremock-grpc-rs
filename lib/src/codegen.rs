@@ -19,6 +19,10 @@
 /// // ... Later in your test (MyMockServer is generated above)
 /// let mut server = MyMockServer::start_default().await;
 /// ```
+/// 
+
+
+
 #[macro_export]
 macro_rules! generate {
     ($prefix:literal, $type: ident) => {
@@ -66,7 +70,7 @@ macro_rules! generate {
             B::Error: Into<tonic::codegen::StdError> + Send + 'static,
         {
             type Response = tonic::codegen::http::Response<tonic::body::BoxBody>;
-            type Error = tonic::codegen::Never;
+            type Error = std::convert::Infallible;
             type Future = tonic::codegen::BoxFuture<Self::Response, Self::Error>;
 
             fn poll_ready(
